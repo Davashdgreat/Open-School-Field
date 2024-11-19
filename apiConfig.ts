@@ -16,7 +16,7 @@ export const signupUser = (data: { name: string; email: string; phone_number: st
 // Login function dynamically targets the endpoint based on user type
 export const login = (data: { email: string; password: string; type: string }) => {
   const endpoint = `/auth/${data.type}-login`; // Constructs endpoint based on type
-  return api.post(endpoint, { email: data.email, password: data.password });
+  return api.post(endpoint, { email: data.email, password: data.password, /*type: data.type*/ });
 };
 export default api;
 

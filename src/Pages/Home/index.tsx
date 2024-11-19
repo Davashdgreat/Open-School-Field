@@ -4,7 +4,6 @@ import Header from '../../components/Header';
 import Steps from '../../components/Steps';
 import Footer from '../../components/Footer';
 import Banner from '../../components/Banner';
-import AgentDashboard from '../Dashboard/AgD/AgDash';
 
 const Home: React.FC = () => (
   <>
@@ -13,7 +12,6 @@ const Home: React.FC = () => (
     <Steps />
     <Banner />
     <Footer />
-    <AgentDashboard />
 
   </>
 );

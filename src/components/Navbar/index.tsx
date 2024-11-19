@@ -31,14 +31,14 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Desktop Menu (lg and up) */}
-        <div className="hidden lg:flex space-x-14 text-base font-normal">
+        <div className="hidden lg:flex space-x-14 text-base font-normal cursor-pointer">
           <a onClick={() => handleNavClick("/schools")} className="hover:text-gray-900 cursor-pointer">Schools</a>
           <a onClick={() => handleNavClick("/fields")} className="hover:text-gray-900 cursor-pointer">Fields</a>
           <a onClick={() => handleNavClick("/agents")} className="hover:text-gray-900 cursor-pointer">Agents</a>
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="lg:hidden flex items-center">
+        <div className="lg:hidden flex items-center cursor-pointer">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-gray-900 hover:text-gray-700 focus:outline-none"
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         <div className={`lg:hidden ${isMenuOpen ? 'block' : 'hidden'} absolute top-[75px] left-0 w-full bg-white shadow-lg`}>
-          <div className="flex flex-col items-center p-4 space-y-4">
+          <div className="flex flex-col items-center p-4 space-y-4 cursor-pointer">
             <a onClick={() => handleNavClick("/schools")} className="hover:text-gray-900">Schools</a>
             <a onClick={() => handleNavClick("/fields")} className="hover:text-gray-900">Fields</a>
             <a onClick={() => handleNavClick("/agents")} className="hover:text-gray-900">Agents</a>

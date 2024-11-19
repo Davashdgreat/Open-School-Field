@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../apiConfig';
 
@@ -9,29 +9,17 @@ const LoginForm: React.FC = () => {
     const navigate = useNavigate(); // Hook for navigation
 
 
-    // Check if the user is already logged in
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        const storedType = localStorage.getItem('type');
-        if (token && storedType) {
-            // Redirect based on the stored profile type
-            navigate(`/dashboard/${storedType}`);
-        }
-    }, [navigate]);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+        const handleSubmit = async (e: React.FormEvent) => {
+            e.preventDefault();
 
         try {
             const response = await login({ email, password, type });
             const token = response.data.token;
 
             if (token){
-                localStorage.setItem('token', token);
-                localStorage.setItem('type', type);
-
                 console.log("Login successful:", response.data);
-                navigate('/dashboard/user')
+
+                navigate(`/dashboard/${type}`)
             // Redirect to dashboard or display success message
             }
 
@@ -94,6 +82,7 @@ const LoginForm: React.FC = () => {
                 </div>
                 <button
                     type="submit"
+                    onClick={handleSubmit}
                     className="w-full bg-green-400 text-white font-semibold py-2 rounded-md hover:bg-green-600 transition duration-200"
                 >
                     Login

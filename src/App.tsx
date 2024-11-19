@@ -10,9 +10,6 @@ import SchoolDashboard from './Pages/Dashboard/SchD/SDash';
 import Fields from './Pages/Fields';
 import Agents from './Pages/Agents';
 import Schools from './Pages/Schools';
-import UserLogin from './Pages/Login/sublogin/Ulogin';
-import AgentLogin from './Pages/Login/sublogin/Alogin';
-import SchoolLogin from './Pages/Login/sublogin/Slogin';
 
 
 const App: React.FC = () => {
@@ -30,9 +27,9 @@ const App: React.FC = () => {
         <Route path="/agents" element={<Agents />} />
         <Route path="/schools" element={<Schools />} />
         <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path="/user-login" element={<UserLogin />} />
-        <Route path="/agent-login" element={<AgentLogin />} />
-        <Route path="/school-login" element={<SchoolLogin />} />
+        <Route path="/user-login" element={<Login />} />
+        <Route path="/agent-login" element={<Login />} />
+        <Route path="/school-login" element={<Login />} />
       </Routes>
     </Router>
   );
