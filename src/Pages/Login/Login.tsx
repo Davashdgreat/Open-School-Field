@@ -8,26 +8,26 @@ const LoginForm: React.FC = () => {
     const [type, setType] = useState('');
     const navigate = useNavigate(); // Hook for navigation
 
-
-        const handleSubmit = async (e: React.FormEvent) => {
-            e.preventDefault();
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
 
         try {
             const response = await login({ email, password, type });
-            const token = response.data.token;
 
-            if (token){
+            if (response.status === 200) {
                 console.log("Login successful:", response.data);
+                const token = response.data.token;
 
-                navigate(`/dashboard/${type}`)
-            // Redirect to dashboard or display success message
+                localStorage.setItem('accessToken', token);
+
+                navigate(`/dashboard/${type}`);
+                // Redirect to the dashboard or display a success message
+            } else {
+                console.error("Unexpected response:", response);
             }
-
         } catch (error) {
             console.error("Login error:", error);
         }
-
-       
     };
 
     return (
@@ -82,7 +82,6 @@ const LoginForm: React.FC = () => {
                 </div>
                 <button
                     type="submit"
-                    onClick={handleSubmit}
                     className="w-full bg-green-400 text-white font-semibold py-2 rounded-md hover:bg-green-600 transition duration-200"
                 >
                     Login
