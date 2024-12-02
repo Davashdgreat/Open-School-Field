@@ -23,9 +23,11 @@ const SignupForm: React.FC = () => {
         try {
             const response = await signupUser({ name, email, phone_number: phone, type, password });
             console.log("Signup successful:", response.data);
+            alert('Signup Successful, Please Login again to access your dashboard')
             // Redirect to dashboard or display success message
         } catch (error) {
             console.error("Signup error:", error);
+            alert('Signup failed, Please try again')
         }
     };
 

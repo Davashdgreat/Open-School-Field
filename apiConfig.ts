@@ -9,23 +9,47 @@ const api = axios.create({
 
 // Signup function dynamically targets the endpoint based on user type
 export const signupUser = (data: { name: string; email: string; phone_number: string; type: string; password: string }) => {
-  const endpoint = `/auth/create-${data.type}`; // Constructs endpoint based on type
-  const fullUrl = `${api.defaults.baseURL}${endpoint}`; // Combine baseURL and endpoint to form the full URL
-    console.log(`Login request URL: ${fullUrl}`); // Log the full URL to the console
+  const endpoint = `/auth/create-${data.type}`;
+  const fullUrl = `${api.defaults.baseURL}${endpoint}`;
+    console.log(`Login request URL: ${fullUrl}`);
   return api.post(endpoint, data);
 };
 
 // Login function dynamically targets the endpoint based on user type
-export const login = (data: { email: string; password: string; type: string }) => {
+export const userlogin = (data: { email: string; password: string;}) => {
 
-  const endpoint = `/auth/${data.type}-login`; // Constructs endpoint based on type
-  const fullUrl = `${api.defaults.baseURL}${endpoint}`; // Combine baseURL and endpoint to form the full URL
+  const endpoint = `/auth/user-login`;
+  const fullUrl = `${api.defaults.baseURL}${endpoint}`;
 
-    console.log(`Login request URL: ${fullUrl}`); // Log the full URL to the console
-    console.log(`Login request body:`, { email: data.email, password: data.password }); // Log the request body
+    console.log(`Login request URL: ${fullUrl}`);
+    console.log(`Login request body:`, { email: data.email, password: data.password });
 
   return api.post(endpoint, { email: data.email, password: data.password});
 };
+
+export const agentlogin = (data: { email: string; password: string;}) => {
+
+  const endpoint = `/auth/agent-login`;
+  const fullUrl = `${api.defaults.baseURL}${endpoint}`;
+
+    console.log(`Login request URL: ${fullUrl}`);
+    console.log(`Login request body:`, { email: data.email, password: data.password });
+
+  return api.post(endpoint, { email: data.email, password: data.password});
+};
+
+export const schoollogin = (data: { email: string; password: string;}) => {
+
+  const endpoint = `/auth/school-login`;
+  const fullUrl = `${api.defaults.baseURL}${endpoint}`;
+
+    console.log(`Login request URL: ${fullUrl}`);
+    console.log(`Login request body:`, { email: data.email, password: data.password });
+
+  return api.post(endpoint, { email: data.email, password: data.password});
+};
+
+
 
 api.interceptors.request.use(
   (config) => {

@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../../apiConfig';
+import { agentlogin } from '../../../apiConfig';
 
-const LoginForm: React.FC = () => {
+const LoginFormAgent: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [type, setType] = useState('');
     const navigate = useNavigate(); // Hook for navigation
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
-            const response = await login({ email, password, type });
+            const response = await agentlogin({ email, password});
 
             if (response.status === 200) {
                 console.log("Login successful:", response.data);
-                const token = response.data.token;
 
-                localStorage.setItem('accessToken', token);
-
-                navigate(`/dashboard/${type}`);
-                // Redirect to the dashboard or display a success message
+                if (response.data.agent) {
+                    localStorage.setItem('agentData', JSON.stringify(response.data.agent));
+                    console.log("Agent data stored:", response.data .agent);  // Confirm data is stored
+    
+                    // Store the access token as well if necessary
+                    localStorage.setItem('accessToken', response.data.accessToken);
+    
+                    navigate(`/dashboard/agent`);  // Redirect to agent dashboard
+                } else {
+                    console.error("No agent data in response.");
+                }
             } else {
                 console.error("Unexpected response:", response);
             }
@@ -37,23 +42,6 @@ const LoginForm: React.FC = () => {
                 className="bg-white p-6 rounded-lg shadow-md w-96"
             >
                 <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-                <div className="mb-4">
-                    <label htmlFor="type" className="block text-sm font-medium text-gray-700">
-                        Profile Type *
-                    </label>
-                    <select
-                        name="type"
-                        id="type"
-                        value={type}
-                        onChange={(e) => setType(e.target.value)}
-                        required
-                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-green-300"
-                    >
-                        <option value="user">User</option>
-                        <option value="agent">Agent</option>
-                        <option value="school">School</option>
-                    </select>
-                </div>
                 <div className="mb-4">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                         Email
@@ -94,4 +82,4 @@ const LoginForm: React.FC = () => {
     );
 };
 
-export default LoginForm;
+export default LoginFormAgent;

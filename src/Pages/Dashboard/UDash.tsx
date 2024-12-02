@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from '../Dhead';
-import Navbar from '../../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from '../../../../apiConfig';
-import ProfilePictureUploader from '../Profilepicture';
-import { User } from '../../../data';
+import axios from '../../../apiConfig';
+import ProfilePictureUploader from './Profilepicture';
+import { User } from '../../data';
+import Navbar from '../../components/Navbar';
+import Header from './Dhead';
 
 
 const UserDashboard: React.FC = () => {
